@@ -17,7 +17,7 @@ console.log("Database connected successfully.");
 
 
 
-
+app.use(express.json()); // for parsing application/json
 
 
 
