@@ -1,11 +1,18 @@
-import express from 'express'; 
-import authRoutes from './routes/auth.routes.js';
 
+import express from 'express';
+import dotenv from 'dotenv';
+
+import authRoutes from './routes/auth.routes.js';
+dotenv.config();
 const app = express();
 
 app.use("/api/auth", authRoutes);
 
-
+//console.log("Starting server...");
+//console.log("Connecting to database...");
+console.log("Database connected successfully.");
+//console.log("Server setup complete.");
+console.log(process.env.MONGO_URI);
 
 
 

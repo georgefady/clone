@@ -4,7 +4,7 @@ export const login = (req, res) => {
     });
 };
 
-export const ignisignup = (req, res) => {
+export const signup = (req, res) => {
     res.json({
         data: "Signup endpoint"
     });
