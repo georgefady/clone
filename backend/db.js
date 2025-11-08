@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+// the DB config file that allow the data to be immgrated
 const connectMongoDB = async () => {
   try {
     const uri = process.env.MONGO_URI;
