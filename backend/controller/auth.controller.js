@@ -61,10 +61,40 @@ try {
 }
 };
 
-export const login = (req, res) => {
-    res.json({
-        data: "Login endpoint"
-    });
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid email or password"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Invalid email or password"
+            });
+        }
+
+        generatetokenandcookie(user._id, res);
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            coverPicture: user.coverPicture,
+            profilePicture: user.profilePicture,
+            followers: user.followers,
+            followings: user.followings
+        });
+    } catch (error) {
+        console.log("Error in login controller:", error);
+        res.status(500).json({
+            message: "Error logging in",
+            error: error.message
+        });
+    }
 };
 
 export const forgotPassword = (req, res) => {
@@ -90,11 +120,48 @@ export const signout = (req, res) => {
 };
 
 export const logout = (req, res) => {
-    res.json({
-        data: "Logout endpoint"
-    });
+    try {
+        res.cookie("token", "", {
+          
+        });
+        res.status(200).json({
+            message: "Logged out successfully"
+        });
+    }
+    catch (error) {
+        console.log("Error in logout controller:", error);
+        res.status(500).json({
+            message: "Error logging out",
+            error: error.message
+        });
+    }
 };
- 
 
+// Placeholder getMe function
+export const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select("-password");
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            coverPicture: user.coverPicture,
+            profilePicture: user.profilePicture,
+            followers: user.followers,
+            followings: user.followings
+        });
+    } catch (error) {
+        console.log("Error in getMe controller:", error);
+        res.status(500).json({
+            message: "Error fetching user data",
+            error: error.message
+        });
+    }
+};
 // dotweb team leader
-// george fady
+//george fady

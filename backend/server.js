@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectMongoDB from  './db.js'; 
 
 import authRoutes from './routes/auth.routes.js';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 const app = express();
 
@@ -19,7 +20,7 @@ console.log("Database connected successfully.");
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
+app.use(cookieParser());
 
 
 app.use("/api/auth", authRoutes);
