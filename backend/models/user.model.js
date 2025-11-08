@@ -1,57 +1,56 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  // Define your user schema fields here
-  username:{
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlenghth: 8,
-  },
-  followers: [
-    { 
-        type: mongoose.Schema.Types.ObjectId, 
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true, // optional but helpful to avoid whitespace issues
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true, // helps normalize email format
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8, // fixed typo here (was `minlenghth`)
+    },
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        default: []
-    }
-  ],
-  following: [
-    { 
-        type: mongoose.Schema.Types.ObjectId, 
+        default: [],
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        default: []
-    }
-],
-  profilePicture: {
-    type: String,
-    default: "",
+        default: [],
+      },
+    ],
+    profilePicture: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+    },
+    coverPicture: {
+      type: String,
+      default: "",
+    },
   },
-
-  bio: {
-    type: String,
-    default: "",
-  },
-  coverPicture: {
-    type: String,
-    default: "",
-  },
-
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 const User = mongoose.model("User", userSchema);
 
 export default User;
-// in data base it will be stored in plural form 'users'
-// mongoose automatically pluralizes the model name to create the collection name
-// so 'User' model will be stored in 'users' collection in MongoDB
-//george fady
-// dotweb team
+// dotweb team leader
+// george fady

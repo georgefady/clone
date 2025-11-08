@@ -1,12 +1,20 @@
 import express from "express";
-import { login, signup, signout, logout} from "../controller/auth.controller.js";
+import { login, signup, signout, logout } from "../controller/auth.controller.js";
 
 const router = express.Router();
 
-// Define your authentication routes here
-router.post("/login", login);
+// Signup route
 router.post("/signup", signup);
+
+// Login route
+router.post("/login", login);
+
+// Logout route
+router.post("/logout", logout);
+
+// Signout route (optional, but redundant — you can remove one)
 router.post("/signout", signout);
-router.post("/signin", logout);
 
 export default router;
+// dotweb team leader 
+//george fady 
