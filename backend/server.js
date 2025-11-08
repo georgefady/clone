@@ -17,14 +17,13 @@ console.log("Database connected successfully.");
 
 
 
-
+// server middleware used to parse the applicatin  and have to be in the middle of the server
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
-
-
 app.use("/api/auth", authRoutes);
-                                                        
+                        
+ // the server port for testing api                                                                                       
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
