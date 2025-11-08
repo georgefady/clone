@@ -8,14 +8,14 @@ try {
     const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailregex.test(email)) {
         return res.status(400).json({
-            message: "Invalid email format"
+            message: "Invalid email adress enter email again"
         });
     }
     
     const existingUser = await User.findOne({username});
     if (existingUser) {
         return res.status(400).json({
-            message: "Username already taken"
+            message: "User already taken"
         });
     }
 
