@@ -23,16 +23,19 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        default: [],
+        default: [], // the user interface
+// its how to follwers it has to be by id
       },
     ],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        default: [],
+        default: [], 
+        //it is the people /id u have followed
       },
     ],
+    //optinal fields
     profilePicture: {
       type: String,
       default: "",
