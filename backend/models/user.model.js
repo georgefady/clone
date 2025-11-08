@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
   },
-  { timestamps: true }
+  { timestamps: true } //used to track when are users created
 );
 
 const User = mongoose.model("User", userSchema);
